@@ -1,0 +1,6861 @@
+d1:
+  LSTM:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr_pct
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+    model:
+      dense_units: 64
+      dropout: 0.2
+      l1_reg: 0.0001
+      lstm_units: 128
+      n_lstm: 3
+  Testmodel:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+  Transformer:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+h1:
+  LSTM:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+    model:
+      dense_units: 64
+      dropout: 0.2
+      l1_reg: 0.0001
+      lstm_units: 128
+      n_lstm: 3
+      layers: []
+  Testmodel:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+  Transformer:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+m15:
+  LSTM:
+    features:
+    - callback: add_sr_levels
+      callback_params:
+        lookback: 100
+        swing_threshold: 0.02
+      enabled: true
+      feature_name: nearest_sup
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_sr_levels
+      callback_params:
+        lookback: 100
+        swing_threshold: 0.02
+      enabled: true
+      feature_name: nearest_res
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_sr_levels
+      callback_params:
+        lookback: 100
+        swing_threshold: 0.02
+      enabled: true
+      feature_name: at_sup
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_sr_levels
+      callback_params:
+        lookback: 100
+        swing_threshold: 0.02
+      enabled: true
+      feature_name: at_res
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: false
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr_pct
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: null
+      callback_params: None
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: null
+      callback_params: None
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: null
+      callback_params: None
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: null
+      callback_params: None
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: null
+      callback_params: None
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: None
+      scaler: RobustScaler
+      scaler_params: None
+    - callback: null
+      callback_params: None
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 4
+        min: 0
+      scaler: RobustScaler
+      scaler_params: None
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_market
+      callback_params: None
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: None
+      scaler: RobustScaler
+      scaler_params: None
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: None
+      scaler: MinMaxScaler
+      scaler_params: null
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: None
+      scaler: MinMaxScaler
+      scaler_params: null
+    - callback: add_time
+      callback_params: None
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_time
+      callback_params: None
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: None
+      scaler: StandardScaler
+      scaler_params: None
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: None
+      scaler: null
+      scaler_params: None
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: None
+      scaler: MinMaxScaler
+      scaler_params: None
+    hyperparameters:
+      alpha:
+        buy: 0.33
+        hold: 0.25
+        sell: 0.33
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 1.23
+        hold: 0.73
+        sell: 1.22
+      dropout: 0.2
+      epochs: 50
+      gamma: 1
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 1
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.2
+      warmup_epochs: 0
+      zigzag_threshold: 0.05
+    model:
+      layers:
+      - type: LSTM
+        params:
+          units: 128
+          dropout: 0.2
+          recurrent_dropout: 0
+          return_sequences: true
+  Testmodel:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+  Transformer:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+    model:
+      layers:
+      - type: MultiHeadSelfAttention
+        params:
+          num_heads: 5
+          key_dim: 32
+          dropout: 0.2
+m5:
+  LSTM:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: false
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr_pct
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 10
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: true
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      label_horizon: '0.0'
+      label_thr: '0.1'
+      zigzag_threshold: 0.1
+      warmup_epochs: 0
+      undersampling_ratio: 0.1
+      tau: 4.2
+      steps_per_epoch: 128
+      simulate: true
+      shap_samples: 100
+      seq_len: 96
+      records_to_load: 100000
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      n_layers: 2
+      n_heads: 4
+      lstm_units: 128
+      lr_warmup: 0.003
+      lr: 0.0003
+      lit: false
+      label_smoothing: 0.02
+      gamma: 1.8
+      epochs: 50
+      dropout: 0.2
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      batch_size: 32
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+    model:
+      layers: []
+  Testmodel:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+    model:
+      layers: []
+  Transformer:
+    features:
+    - callback: add_atr
+      callback_params:
+        period: 14
+      enabled: true
+      feature_name: atr
+      prescaler: log1p
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: open
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: high
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: low
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: false
+      feature_name: close
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: volume
+      prescaler: log1p
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: null
+      callback_params: null
+      enabled: true
+      feature_name: signallevel
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_short
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_long
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_spread
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_short
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_slope_long
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_ema
+      callback_params:
+        long: 34
+        short: 8
+      enabled: false
+      feature_name: ema_cross
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: stoch_k
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: div_stoch_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: true
+      feature_name: div_stoch_strength
+      prescaler: clip
+      prescaler_params:
+        max: 5
+        min: 0
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_d
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_stoch
+      callback_params:
+        d: 3
+        k: 14
+        lookback: 20
+        smooth_k: 3
+      enabled: false
+      feature_name: stoch_diff
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_syd
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: is_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_syd_tok
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_tok_eur
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: overlap_eur_usa
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_market
+      callback_params: null
+      enabled: false
+      feature_name: active_sessions
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bb_width
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbl
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbu
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm
+      prescaler: pct_change
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_bb
+      callback_params:
+        length: 20
+        std: 2
+      enabled: false
+      feature_name: bbm_slope
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: technical
+    - callback: add_past_logreturn
+      callback_params:
+        shift: 1
+      enabled: false
+      feature_name: past_logret_1
+      prescaler: null
+      prescaler_params: null
+      scaler: RobustScaler
+      scaler_params: null
+    - callback: add_hurst
+      callback_params:
+        col: close
+        max_lag: 20
+        min_lag: 2
+        window: 500
+      enabled: false
+      feature_name: hurst
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_fuzzy
+      callback_params:
+        col: close
+        m: 2
+        r: 0.2
+        window: 500
+      enabled: false
+      feature_name: fuzzy
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: entropy
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: h1_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: doy_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: m5_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: true
+      feature_name: m15_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_sin
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_time
+      callback_params: null
+      enabled: false
+      feature_name: dow_cos
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: rsi
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_above_70
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: rsi_below_30
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: false
+      feature_name: div_rsi_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_rsi
+      callback_params:
+        length: 14
+        lookback: 20
+      enabled: true
+      feature_name: div_rsi_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_signal
+      prescaler: null
+      prescaler_params: null
+      scaler: StandardScaler
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: macd_cross_above
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_flag
+      prescaler: null
+      prescaler_params: null
+      scaler: null
+      scaler_params: null
+    - callback: add_macd
+      callback_params:
+        fast: 12
+        lookback: 20
+        signal: 9
+        slow: 26
+      enabled: false
+      feature_name: div_macd_strength
+      prescaler: null
+      prescaler_params: null
+      scaler: MinMaxScaler
+      scaler_params: null
+    hyperparameters:
+      alpha:
+        buy: 0.3
+        hold: 0.4
+        sell: 0.3
+      bal_nat_sample_weights:
+        bal: 2
+        nat: 1
+      batch_size: 32
+      class_weights:
+        buy: 2.3
+        hold: 1
+        sell: 2.3
+      dropout: 0.2
+      epochs: 50
+      gamma: 1.8
+      label_smoothing: 0.02
+      lit: false
+      lr: 0.0003
+      lr_warmup: 0.003
+      lstm_units: 128
+      n_heads: 4
+      n_layers: 2
+      oversampling_weights:
+        buy: 1
+        hold: 0.45
+        sell: 1
+      records_to_load: 100000
+      seq_len: 96
+      shap_samples: 100
+      simulate: true
+      steps_per_epoch: 128
+      tau: 0.2
+      undersampling_ratio: 0.1
+      warmup_epochs: 0
+      zigzag_threshold: 0.1
+    model:
+      layers: []

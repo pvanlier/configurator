@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 
 const FEATURE_GROUPS = {
-  "Bolinger Bands": ["bbu", "bbm", "bbl", "bb_width", "bbm_slope"],
-  "Support/Resistance Levels": ["nearest_sup", "nearest_res", "at_sup", "at_res"],
+  "Price/Volatility": ["open", "high", "low", "close", "volume", "atr", "atr_pct", "signallevel"],
   "EMA": ["ema_short", "ema_long", "ema_spread", "ema_slope_short", "ema_slope_long", "ema_cross"],
   "RSI": ["rsi", "rsi_slope", "rsi_above_70", "rsi_below_30", "div_rsi_flag", "div_rsi_strength"],
   "MACD": ["macd", "macd_signal", "macd_cross_above", "div_macd_flag", "div_macd_strength"],
   "STOCH": ["stoch_k", "stoch_d", "stoch_diff", "div_stoch_flag", "div_stoch_strength"],
+  "Bolinger Bands": ["bbu", "bbm", "bbl", "bb_width", "bbm_slope"],
+  "Support/Resistance Levels": ["nearest_sup", "nearest_res", "at_sup", "at_res"],
   "Market Sessions": [
     "is_syd", "is_tok", "is_eur", "is_usa",
     "overlap_syd_tok", "overlap_tok_eur", "overlap_eur_usa", "overlap_syd_eur", "active_sessions"
@@ -16,8 +17,7 @@ const FEATURE_GROUPS = {
     "m5_sin", "m5_cos", "m15_sin", "m15_cos",
     "h1_sin", "h1_cos", "d1_sin", "d1_cos",
     "dow_sin", "dow_cos", "doy_sin", "doy_cos"
-  ],
-  "Price/Volatility": ["open", "high", "low", "close", "volume", "atr", "atr_pct", "signallevel"]
+  ]
 };
 
 const SCALERS = ["", "MinMaxScaler", "StandardScaler", "RobustScaler"];
@@ -97,7 +97,8 @@ export default function FeaturesTab({ config, onChange }) {
     { key: "prescaler", label: "Prescaler", type: "select-prescaler" },
     { key: "prescaler_params", label: "Prescaler Params", type: "json" },
     { key: "scaler", label: "Scaler", type: "select-scaler" },
-    { key: "scaler_params", label: "Scaler Params", type: "json" }
+    { key: "scaler_params", label: "Scaler Params", type: "json" },
+    { key: "help", label: "Help", type: "text" }
   ];
 
   return (

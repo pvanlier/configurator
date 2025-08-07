@@ -9,50 +9,160 @@ import {
 
 // Define available blocks per model type
 const BLOCK_LIBRARY = {
-  LSTM: ["LSTM", "Dense", "Dropout", "Flatten", "Activation"],
+  LSTM: ["InputLayer","Masking","Embedding",
+         "LSTM", "StackedLSTM" ,"BidirectionalLSTM",
+         "Dropout", "SpatialDropout1D", "BatchNormalization" ,
+         "TimeDistributed", "GlobalMaxPool1D","GlobalAveragePooling1D",
+         "AdditiveAttention","MultiHeadSelfAttention",
+         "Activation","Dense",
+         "Conv1D","GaussianNoise","Reshape/Flatten"],
   Transformer: [
-    "MultiHeadSelfAttention",
-    "FeedForward",
-    "Dropout",
-    "LayerNormalization",
-    "Add"
-  ],
-  Testmodel: ["Dense", "Activation", "Dropout"]
-};
+         "InputLayer","Embedding", "TokenPositionalEmbedding",
+         "MultiHeadSelfAttention", "AdditiveAttention", "AttentionMask",
+         "EncoderLayer", "DecoderLayer", "TransformerEncoder", "TransformerDecoder",
+         "DenseFFN", "GlobalMaxPool1D", "GlobalAveragePooling1D",
+         "LayerNormalization", "Dropout", "SpatialDropout1D",
+         "Dense","Activation","PaddingMask","LookAheadMask", "Add_and_Norm"
+      ],
+    Testmodel: ["InputLayer", "Masking", "Embedding",
+        "LSTM", "StackedLSTM", "BidirectionalLSTM",
+        "Dropout", "SpatialDropout1D", "BatchNormalization",
+        "TimeDistributed", "GlobalMaxPool1D", "GlobalAveragePooling1D",
+        "AdditiveAttention", "MultiHeadSelfAttention",
+        "Activation", "Dense",
+        "Conv1D", "GaussianNoise", "Reshape/Flatten",
+        "TokenPositionalEmbedding",
+        "AttentionMask",
+        "EncoderLayer", "DecoderLayer", "TransformerEncoder", "TransformerDecoder",
+        "DenseFFN", "LayerNormalization",
+        "PaddingMask", "LookAheadMask", "Add_and_Norm"]
+    };
 
 // Parameter schemas for each block
 const PARAM_SCHEMAS = {
-  LSTM: [
-    { name: "units", label: "Units", type: "number", default: 128 },
-    { name: "dropout", label: "Dropout", type: "number", default: 0.2 },
-    { name: "recurrent_dropout", label: "Recurrent Dropout", type: "number", default: 0.0 },
-    { name: "return_sequences", label: "Return Sequences", type: "boolean", default: true }
-  ],
-  Dense: [
-    { name: "units", label: "Units", type: "number", default: 64 },
-    { name: "activation", label: "Activation", type: "text", default: "relu" }
-  ],
-  Dropout: [
-    { name: "rate", label: "Rate", type: "number", default: 0.5 }
-  ],
-  Flatten: [],
-  Activation: [
-    { name: "activation", label: "Activation", type: "text", default: "relu" }
-  ],
-  MultiHeadSelfAttention: [
-    { name: "num_heads", label: "Number of Heads", type: "number", default: 4 },
-    { name: "key_dim", label: "Key Dimension", type: "number", default: 32 },
-    { name: "dropout", label: "Dropout", type: "number", default: 0.1 }
-  ],
-  FeedForward: [
-    { name: "ff_dim", label: "FF Dimension", type: "number", default: 128 },
-    { name: "activation", label: "Activation", type: "text", default: "relu" }
-  ],
-  LayerNormalization: [
-    { name: "axis", label: "Axis", type: "number", default: -1 },
-    { name: "epsilon", label: "Epsilon", type: "number", default: 1e-6 }
-  ],
-  Add: []
+    InputLayer: [ { name: "input_shape", label: "Input Shape", type: "parameter", default: "input_shape" , help: "" }
+            ],
+    Masking: [ { name: "mask_value", label: "Mask Value", type: "float", default : 0.0 , help: "" }
+            ],
+    TokenPositionalEmbedding: [
+            { name: "max_len", label: "Maximum Length", type: "int", default: 0 , help: "" },
+            { name: "embed_dim", label: "Embedding Dimensions", type: "int", default: 0 , help: "" },
+            { name: "mode", label: "Mode",  type: "text", default: "sum" , help: "" }
+            ],
+    Embedding: [
+            { name: "input_dim", label: "Input Dimensions", type: "int", default: 0 , help: "" },
+            { name: "output_dim", label: "Output Dimensions", type: "int", default: 0 , help: "" },
+            { name: "input_length", label: "Input Length", type: "int", default: 0 , help: "" }
+            ],
+    LSTM:   [
+            { name: "units", label: "Units", type: "number", default: 128 , help: "" },
+            { name: "dropout", label: "Dropout", type: "number", default: 0.2 , help: "" },
+            { name: "recurrent_dropout", label: "Recurrent Dropout", type: "number", default: 0.0 , help: "" },
+            { name: "return_sequences", label: "Return Sequences", type: "boolean", default: true , help: "" }
+            ],
+    StackedLSTM:[
+            { name: "units", label: "Units", type: "number", default: 128 , help: "" },
+            { name: "dropout", label: "Dropout", type: "number", default: 0.2 , help: "" },
+            { name: "recurrent_dropout", label: "Recurrent Dropout", type: "number", default: 0.0 , help: "" },
+            { name: "return_sequences", label: "Return Sequences", type: "boolean", default: true , help: "" }
+            ],
+    BidirectionalLSTM:[
+            { name: "layer", label: "RNN layer instance", type: "text", default: "" , help: "" },
+            { name: "merge_mode", label: "Merge Mode",  type: "text", default: "" , help: "" }
+            ],
+    Dropout: [
+            { name: "rate", label: "Rate", type: "number", default: 0.5 , help: "" }
+            ],
+    SpatialDropout1D: [
+            { name: "rate", label: "Rate", type: "number", default: 0.5 , help: "" }
+            ],
+    BatchNormalization: [
+            { name: "axis", label: "Axis", type: "number", default: -1 , help: "" },
+            { name: "momentum", label: "Momentum", type: "float", default: 1e-6 , help: "" },
+            { name: "epsilon", label: "Epsilon", type: "float", default: 1e-6 , help: "" }
+            ],
+    TimeDistributed: [
+            { name: "layer", label: "layer instance", type: "text", default: "" , help: "" }
+            ],
+    GlobalMaxPool1D: [ { help: "" }
+            ],
+    GlobalAveragePooling1D: [ { help: "" }
+            ],
+    AdditiveAttention: [
+            { name: "units", label: "Units", type: "int", default: 0 , help: "" },
+            { name: "use_scale", label: "Use Scale", type: "boolean", default: true , help: "" }
+            ],
+    AttentionMask: [
+            { name: "mask", label: "Mask", type: "tensor", default: 0.0 , help: "" }
+            ],
+    EncoderLayer: [
+            { name: "embed_dim", label: "Embeddings Dimension", type: "int", default: 0 , help: "" },
+            { name: "num_heads", label: "Number of Heads", type: "number", default: 4 , help: "" },
+            { name: "ff_dim", label: "ff Dimension", type: "number", default: 32 , help: "" },
+            { name: "dropout", label: "Dropout", type: "number", default: 0.1 , help: "" }
+            ],
+    DecoderLayer: [
+            { name: "embed_dim", label: "Embeddings Dimension", type: "int", default: 0 , help: "" },
+            { name: "num_heads", label: "Number of Heads", type: "int", default: 4 , help: "" },
+            { name: "ff_dim", label: "Feedforward Dimension", type: "int", default: 32 , help: "" },
+            { name: "dropout", label: "Dropout", type: "float", default: 0.1 , help: "" }
+            ],
+    TransformerEncoder: [
+            { name: "num_layers", label: "Number of Layers", type: "int", default: 0 , help: "" },
+            { name: "embed_dim", label: "Embeddings Dimension", type: "int", default: 0 , help: "" },
+            { name: "num_heads", label: "Number of Heads", type: "int", default: 4 , help: "" },
+            { name: "ff_dim", label: "Feedforward Dimension", type: "int", default: 32 , help: "" },
+            { name: "dropout", label: "Dropout", type: "float", default: 0.1 , help: "" }
+            ],
+    TransformerDecoder: [
+            { name: "num_layers", label: "Number of Layers", type: "int", default: 0 , help: "" },
+            { name: "embed_dim", label: "Embeddings Dimension", type: "int", default: 0 , help: "" },
+            { name: "num_heads", label: "Number of Heads", type: "int", default: 4 , help: "" },
+            { name: "ff_dim", label: "Feedforward Dimension", type: "int", default: 32 , help: "" },
+            { name: "dropout", label: "Dropout", type: "float", default: 0.1 , help: "" }
+            ],
+    MultiHeadSelfAttention: [
+            { name: "num_heads", label: "Number of Heads", type: "number", default: 4 , help: "" },
+            { name: "key_dim", label: "Key Dimension", type: "number", default: 32 , help: "" },
+            { name: "dropout", label: "Dropout", type: "number", default: 0.1 , help: "" }
+            ],
+    Activation: [
+            { name: "activation", label: "Activation", type: "text", default: "relu" , help: "" }
+            ],
+    Dense:  [
+            { name: "units", label: "Units", type: "number", default: 64 , help: "" },
+            { name: "activation", label: "Activation", type: "text", default: "relu" , help: "" }
+            ],
+    DenseFFN: [
+            { name: "units", label: "Units", type: "number", default: 64 , help: "" },
+            { name: "activation", label: "Activation", type: "text", default: "relu" , help: "" }
+            ],
+    PaddingMask: [ { help: "" }
+            ],
+    LookAheadMask: [ { help: "" }
+            ],
+    Add_and_Norm: [ { help: "" }
+            ],
+    Conv1D: [
+            { name: "filters", label: "Filters", type: "int", default: 0 , help: "" },
+            { name: "kernel_size", label: "Kernel size", type: "inttuple", default: 0 , help: "" },
+            { name: "strides", label: "Strides", type: "inttuple", default: 0 , help: "" },
+            { name: "activation", label: "Activation", type: "text", default: "relu" , help: "" }
+            ],
+    GaussianNoise:[
+            { name: "stddev", label: "Standard Deviation", type: "number", default: 0.1 , help: "" }
+            ],
+    Reshape_Flatten:[
+            { name: "target_shape", label: "Target Shape", type: "inttuple", default: 0 , help: "" }
+            ],
+    FeedForward: [
+            { name: "ff_dim", label: "FF Dimension", type: "number", default: 128 , help: "" },
+            { name: "activation", label: "Activation", type: "text", default: "relu" , help: "" }
+            ],
+    LayerNormalization: [
+            { name: "axis", label: "Axis", type: "number", default: -1 , help: "" },
+            { name: "epsilon", label: "Epsilon", type: "number", default: 1e-6 , help: "" }
+            ]
 };
 
 // Helper to reorder an array

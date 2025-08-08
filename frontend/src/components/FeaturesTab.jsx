@@ -1,5 +1,15 @@
 // frontend/src/components/FeaturesTab.jsx
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
+
+/**
+ * Props
+ * - config:            current timeframe+model config object (must contain `.features`)
+ * - onChange(nextConfig)
+ * - allConfigs:        full tree { tf: { model: {features, ...} } }
+ * - currentTf:         string (e.g. "m15")
+ * - currentModel:      string (e.g. "LSTM")
+ * - setAllConfigs:     setter to replace whole configs object
+ */
 
 const FEATURE_GROUPS = {
   "Price/Volatility": ["open", "high", "low", "close", "volume", "atr", "atr_pct", "signallevel"],
@@ -23,103 +33,134 @@ const FEATURE_GROUPS = {
 const SCALERS = ["", "MinMaxScaler", "StandardScaler", "RobustScaler"];
 const PRESCALERS = ["", "pct_change", "log1p", "clip"];
 
-// Format for display: objects as pretty JSON
 function formatDisplay(raw) {
   if (raw == null) return "";
-  if (typeof raw === "object") {
-    return JSON.stringify(raw, null, 2);
-  }
+  if (typeof raw === "object") return JSON.stringify(raw, null, 2);
   return String(raw);
 }
 
-// Parse JSON for JSON fields
 function parseJSON(raw) {
-  try {
-    return JSON.parse(raw);
-  } catch {
-    throw new Error("Invalid JSON");
-  }
+  try { return JSON.parse(raw); } catch { throw new Error("Invalid JSON"); }
 }
 
-export default function FeaturesTab({ config, onChange }) {
+export default function FeaturesTab({ config, onChange, allConfigs, currentTf, currentModel, setAllConfigs }) {
   const feats = config.features || [];
   const [jsonErrors, setJsonErrors] = useState({});
 
   const updateFeat = (idx, field, value) => {
-    const newFeats = feats.map((f, i) =>
-      i === idx ? { ...f, [field]: value } : f
-    );
+    const newFeats = feats.map((f, i) => i === idx ? { ...f, [field]: value } : f);
     onChange({ ...config, features: newFeats });
   };
 
   const handleJSONBlur = (idx, field, rawValue) => {
     const key = `${idx}-${field}`;
     if (rawValue.trim() === "") {
-      // Clear value
       updateFeat(idx, field, null);
-      setJsonErrors(prev => {
-        const next = { ...prev };
-        delete next[key];
-        return next;
-      });
+      setJsonErrors(prev => { const n = { ...prev }; delete n[key]; return n; });
       return;
     }
     try {
       const parsed = parseJSON(rawValue);
       updateFeat(idx, field, parsed);
-      setJsonErrors(prev => {
-        const next = { ...prev };
-        delete next[key];
-        return next;
-      });
+      setJsonErrors(prev => { const n = { ...prev }; delete n[key]; return n; });
     } catch (err) {
       setJsonErrors(prev => ({ ...prev, [key]: err.message }));
     }
   };
 
   // Grouping
-  const grouped = {};
-  Object.keys(FEATURE_GROUPS).forEach(g => (grouped[g] = []));
-  grouped.Other = [];
-  feats.forEach((f, idx) => {
-    const grp =
-      Object.entries(FEATURE_GROUPS).find(([, arr]) =>
-        arr.includes(f.feature_name)
-      )?.[0] || "Other";
-    grouped[grp].push({ ...f, _idx: idx });
-  });
+  const grouped = useMemo(() => {
+    const g = {}; Object.keys(FEATURE_GROUPS).forEach(k => g[k] = []); g.Other = [];
+    feats.forEach((f, idx) => {
+      const grp = Object.entries(FEATURE_GROUPS).find(([, arr]) => arr.includes(f.feature_name))?.[0] || "Other";
+      g[grp].push({ ...f, _idx: idx });
+    });
+    return g;
+  }, [feats]);
 
   const COLUMNS = [
     { key: "enabled", label: "Enabled", type: "checkbox" },
-    { key: "feature_name", label: "Feature", type: "label" },
+    { key: "feature_name", label: "Feature", type: "label-with-tooltip" },
     { key: "callback", label: "Callback", type: "text" },
     { key: "callback_params", label: "Callback Params", type: "json" },
     { key: "prescaler", label: "Prescaler", type: "select-prescaler" },
     { key: "prescaler_params", label: "Prescaler Params", type: "json" },
     { key: "scaler", label: "Scaler", type: "select-scaler" },
-    { key: "scaler_params", label: "Scaler Params", type: "json" },
-    { key: "help", label: "Help", type: "text" }
+    { key: "scaler_params", label: "Scaler Params", type: "json" }
   ];
 
+  // ─────────────────────────────────────────────────────────────
+  // PUSH copy: from current Tf/Model → selected destination timeframe (same model)
+  // ─────────────────────────────────────────────────────────────
+  const tfOptions = useMemo(() => allConfigs ? Object.keys(allConfigs) : [], [allConfigs]);
+  const [copyDstTf, setCopyDstTf] = useState(() => {
+    if (!tfOptions.length || !currentTf) return "";
+    return tfOptions.find(k => k !== currentTf) || tfOptions[0];
+  });
+  const canCopy = Boolean(allConfigs && currentTf && currentModel && setAllConfigs && copyDstTf);
+
+  const handlePushToDst = () => {
+    if (!canCopy) return;
+    const src = allConfigs?.[currentTf]?.[currentModel];
+    const srcFeatures = src?.features || [];
+    const cloned = JSON.parse(JSON.stringify(srcFeatures));
+
+    const nextAll = { ...allConfigs };
+    nextAll[copyDstTf] = nextAll[copyDstTf] || {};
+    const dstBase = nextAll[copyDstTf][currentModel] || src || {};
+    nextAll[copyDstTf][currentModel] = { ...dstBase, features: cloned };
+
+    setAllConfigs(nextAll);
+  };
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-      {Object.entries(grouped).map(
-        ([group, items]) =>
-          items.length > 0 && (
-            <div key={group}>
-              <h3 style={{ marginBottom: "0.5rem" }}>{group}</h3>
+    <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+      {/* Push bar */}
+      {allConfigs && currentTf && (
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+          padding: "0.75rem 1rem",
+          border: "1px solid #ddd",
+          borderRadius: 8,
+          background: "#fafafa"
+        }}>
+          <strong>Push features:</strong>
+          <span>From <code>{currentTf}</code> / <code>{currentModel || "model"}</code></span>
+          <span>→</span>
+          <label>
+            To timeframe:&nbsp;
+            <select value={copyDstTf || ""} onChange={e => setCopyDstTf(e.target.value)}>
+              <option value="" disabled>Select timeframe</option>
+              {tfOptions.map(tf => (
+                <option key={tf} value={tf} disabled={tf === currentTf}>{tf}</option>
+              ))}
+            </select>
+          </label>
+          <button
+            type="button"
+            onClick={handlePushToDst}
+            disabled={!canCopy}
+            title={canCopy ? `Push features from ${currentTf}/${currentModel} to ${copyDstTf}` : "Provide allConfigs/currentTf/currentModel/setAllConfigs to enable push"}
+            style={{ padding: "0.4rem 0.75rem", cursor: canCopy ? "pointer" : "not-allowed" }}
+          >
+            Push
+          </button>
+        </div>
+      )}
+
+      {/* Per‑group tables */}
+      {Object.entries(grouped).map(([group, items]) => (
+        items.length > 0 && (
+          <fieldset key={group} style={{ border: "1px solid #ddd", borderRadius: 8 }}>
+            <legend style={{ padding: "0 0.5rem", fontWeight: 600 }}>{group}</legend>
+            <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse" }}>
                 <thead>
                   <tr>
                     {COLUMNS.map(col => (
-                      <th
-                        key={col.key}
-                        style={{
-                          textAlign: "left",
-                          borderBottom: "2px solid #999",
-                          padding: "0.5rem"
-                        }}
-                      >
+                      <th key={col.key} style={{ textAlign: "left", borderBottom: "2px solid #999", padding: "0.5rem", whiteSpace: "nowrap" }}>
                         {col.label}
                       </th>
                     ))}
@@ -132,73 +173,36 @@ export default function FeaturesTab({ config, onChange }) {
                         const raw = f[col.key];
                         const idx = f._idx;
                         const key = `${idx}-${col.key}`;
-                        const style = {
-                          padding: "0.5rem",
-                          borderBottom: "1px solid #ddd"
-                        };
+                        const style = { padding: "0.5rem", borderBottom: "1px solid #eee", verticalAlign: "top" };
                         switch (col.type) {
                           case "checkbox":
                             return (
                               <td style={style} key={col.key}>
-                                <input
-                                  type="checkbox"
-                                  checked={!!raw}
-                                  onChange={e =>
-                                    updateFeat(
-                                      idx,
-                                      col.key,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
+                                <input type="checkbox" checked={!!raw} onChange={e => updateFeat(idx, col.key, e.target.checked)} />
                               </td>
                             );
                           case "select-prescaler":
                             return (
                               <td style={style} key={col.key}>
-                                <select
-                                  value={raw || ""}
-                                  onChange={e =>
-                                    updateFeat(
-                                      idx,
-                                      col.key,
-                                      e.target.value
-                                    )
-                                  }
-                                >
-                                  {PRESCALERS.map(opt => (
-                                    <option key={opt} value={opt}>
-                                      {opt === "" ? "None" : opt}
-                                    </option>
-                                  ))}
+                                <select value={raw || ""} onChange={e => updateFeat(idx, col.key, e.target.value)}>
+                                  {PRESCALERS.map(opt => (<option key={opt} value={opt}>{opt === "" ? "None" : opt}</option>))}
                                 </select>
                               </td>
                             );
                           case "select-scaler":
                             return (
                               <td style={style} key={col.key}>
-                                <select
-                                  value={raw || ""}
-                                  onChange={e =>
-                                    updateFeat(
-                                      idx,
-                                      col.key,
-                                      e.target.value
-                                    )
-                                  }
-                                >
-                                  {SCALERS.map(opt => (
-                                    <option key={opt} value={opt}>
-                                      {opt === "" ? "None" : opt}
-                                    </option>
-                                  ))}
+                                <select value={raw || ""} onChange={e => updateFeat(idx, col.key, e.target.value)}>
+                                  {SCALERS.map(opt => (<option key={opt} value={opt}>{opt === "" ? "None" : opt}</option>))}
                                 </select>
                               </td>
                             );
-                          case "label":
+                          case "label-with-tooltip":
                             return (
                               <td style={style} key={col.key}>
-                                {formatDisplay(raw)}
+                                <span title={formatDisplay(f.help) || ""} style={{ cursor: f.help ? "help" : "default", fontWeight: 600 }}>
+                                  {formatDisplay(raw)}
+                                </span>
                               </td>
                             );
                           case "json":
@@ -207,35 +211,12 @@ export default function FeaturesTab({ config, onChange }) {
                                 <input
                                   type="text"
                                   value={formatDisplay(raw)}
-                                  onChange={e =>
-                                    updateFeat(
-                                      idx,
-                                      col.key,
-                                      e.target.value
-                                    )
-                                  }
-                                  onBlur={e =>
-                                    handleJSONBlur(
-                                      idx,
-                                      col.key,
-                                      e.target.value
-                                    )
-                                  }
-                                  style={{
-                                    width: "100%",
-                                    borderColor: jsonErrors[key]
-                                      ? "red"
-                                      : undefined
-                                  }}
+                                  onChange={e => updateFeat(idx, col.key, e.target.value)}
+                                  onBlur={e => handleJSONBlur(idx, col.key, e.target.value)}
+                                  style={{ width: "100%", borderColor: jsonErrors[key] ? "red" : undefined }}
                                 />
                                 {jsonErrors[key] && (
-                                  <div
-                                    style={{
-                                      color: "red",
-                                      fontSize: "0.8em",
-                                      marginTop: "0.25em"
-                                    }}
-                                  >
+                                  <div style={{ color: "red", fontSize: "0.8em", marginTop: "0.25em" }}>
                                     {jsonErrors[key]}
                                   </div>
                                 )}
@@ -245,18 +226,7 @@ export default function FeaturesTab({ config, onChange }) {
                           default:
                             return (
                               <td style={style} key={col.key}>
-                                <input
-                                  type="text"
-                                  value={formatDisplay(raw)}
-                                  onChange={e =>
-                                    updateFeat(
-                                      idx,
-                                      col.key,
-                                      e.target.value
-                                    )
-                                  }
-                                  style={{ width: "100%" }}
-                                />
+                                <input type="text" value={formatDisplay(raw)} onChange={e => updateFeat(idx, col.key, e.target.value)} style={{ width: "100%" }} />
                               </td>
                             );
                         }
@@ -266,8 +236,9 @@ export default function FeaturesTab({ config, onChange }) {
                 </tbody>
               </table>
             </div>
-          )
-      )}
+          </fieldset>
+        )
+      ))}
     </div>
   );
 }

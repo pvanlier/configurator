@@ -8,13 +8,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 // Group definitions
 const HYPER_GROUPS = {
   "Training Parameters": [
-    "seq_len", "epochs", "batch_size", "lr", "dropout", "label_smoothing",
-    "undersampling_ratio", "bal_nat_sample_weights", "oversampling_weights",
-    "class_weights", "alpha", "gamma", "warmup_epochs", "lr_warmup",
-    "steps_per_epoch", "tau", "records_to_load", "zigzag_threshold"
+      "alpha", "bal_nat_sample_weights", "batch_size", "class_weights", "dropout", "epochs", "gamma", "label_horizon",
+      "label_smoothing", "label_thr", "lr", "lr_warmup", "oversampling_weights", "records_to_load", "seq_len",
+      "steps_per_epoch", "tau", "undersampling_ratio", "warmup_epochs", "zigzag_threshold"
   ],
-  "Reporting Parameters": ["label_thr", "label_horizon"],
-  "Output Parameters": ["simulate", "lit", "shap_samples"]
+  "Reporting Parameters": [],
+    "Output Parameters": ["lit", "shap_samples", "simulate"]
 };
 
 // Build validation schema dynamically

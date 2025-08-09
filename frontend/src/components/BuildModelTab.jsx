@@ -1,377 +1,157 @@
-// frontend/src/components/BuildModelTab.jsx
+// src/components/BuildModelTab.jsx
+import React, { useEffect,  useRef, useState } from "react";
 
-import React, { useState, useEffect, useRef } from "react";
-import {
-  DragDropContext,
-  Droppable,
-  Draggable
-} from "@hello-pangea/dnd";
-
-// Define available blocks per model type
-const LSTM = [
-    "InputLayer","Masking","Embedding",
-    "LSTM", "BidirectionalLSTM",
-    "Dropout", "SpatialDropout1D", "BatchNormalization" ,
-    "TimeDistributed", "GlobalMaxPooling1D","GlobalAveragePooling1D",
-    "AdditiveAttention","MultiHeadAttention",
-    "Activation","Dense",
-    "Conv1D","GaussianNoise","Reshape","Flatten"
+/**
+ * Drag & drop model builder.
+ * Stores layers under config.model.layers as an ordered array.
+ * Each layer: { id, type, params: { ... } }
+ */
+const LAYER_TEMPLATES = [
+  { type: "Input", params: { features: 64, seq_len: 120 } },
+  { type: "LSTM", params: { units: 64, return_sequences: true, dropout: 0.0 } },
+  { type: "BidirectionalLSTM", params: { units: 64, return_sequences: true, dropout: 0.0 } },
+  { type: "Dense", params: { units: 64, activation: "relu" } },
+  { type: "Dropout", params: { rate: 0.1 } },
+  { type: "GlobalAveragePooling1D", params: {} },
+  { type: "MultiHeadAttention", params: { heads: 4, key_dim: 64 } },
+  { type: "LayerNormalization", params: {} },
 ];
 
-const Transformer = [
-    "InputLayer","Embedding",
-    "MultiHeadAttention", "AdditiveAttention",
-    "EncoderLayer", "DecoderLayer", "TransformerEncoder", "TransformerDecoder",
-    "GlobalMaxPooling1D", "GlobalAveragePooling1D",
-    "LayerNormalization", "Dropout", "SpatialDropout1D",
-    "Dense","Activation"
-];
-
-const BLOCK_LIBRARY = {
-    LSTM,
-    Transformer,
-    Testmodel: [...new Set([...LSTM, ...Transformer])]
-};
-
-// Parameter schemas for each block
-const PARAM_SCHEMAS = {
-    InputLayer: [ { name: "input_shape", label: "Input Shape", type: "text", default: "input_shape" , help: "" }
-            ],
-    Masking: [ { name: "mask_value", label: "Mask Value", type: "number", default : 0.0 , help: "" }
-            ],
-    Embedding: [
-            { name: "input_dim", label: "Input Dimensions", type: "number", default: 0 , help: "" },
-            { name: "output_dim", label: "Output Dimensions", type: "number", default: 0 , help: "" },
-            { name: "input_length", label: "Input Length", type: "number", default: 0 , help: "" }
-            ],
-    LSTM:   [
-            { name: "units", label: "Units", type: "number", default: 128 , help: "" },
-            { name: "dropout", label: "Dropout", type: "number", default: 0.2 , help: "" },
-            { name: "recurrent_dropout", label: "Recurrent Dropout", type: "number", default: 0.0 , help: "" },
-            { name: "return_sequences", label: "Return Sequences", type: "boolean", default: true , help: "" }
-            ],
-    BidirectionalLSTM:[
-            { name: "layer", label: "RNN layer instance", type: "text", default: "" , help: "" },
-            { name: "merge_mode", label: "Merge Mode",  type: "text", default: "" , help: "" }
-            ],
-    Dropout: [
-            { name: "rate", label: "Rate", type: "number", default: 0.5 , help: "" }
-            ],
-    SpatialDropout1D: [
-            { name: "rate", label: "Rate", type: "number", default: 0.5 , help: "" }
-            ],
-    BatchNormalization: [
-            { name: "axis", label: "Axis", type: "number", default: -1 , help: "" },
-            { name: "momentum", label: "Momentum", type: "number", default: 1e-6 , help: "" },
-            { name: "epsilon", label: "Epsilon", type: "number", default: 1e-6 , help: "" }
-            ],
-    TimeDistributed: [
-            { name: "layer", label: "layer instance", type: "text", default: "" , help: "" }
-            ],
-    GlobalMaxPooling1D: [ { help: "" }
-            ],
-    GlobalAveragePooling1D: [ { help: "" }
-            ],
-    AdditiveAttention: [
-            { name: "units", label: "Units", type: "number", default: 0 , help: "" },
-            { name: "use_scale", label: "Use Scale", type: "boolean", default: true , help: "" }
-            ],
-    EncoderLayer: [
-            { name: "embed_dim", label: "Embeddings Dimension", type: "number", default: 0 , help: "" },
-            { name: "num_heads", label: "Number of Heads", type: "number", default: 4 , help: "" },
-            { name: "ff_dim", label: "ff Dimension", type: "number", default: 32 , help: "" },
-            { name: "dropout", label: "Dropout", type: "number", default: 0.1 , help: "" }
-            ],
-    DecoderLayer: [
-            { name: "embed_dim", label: "Embeddings Dimension", type: "number", default: 0 , help: "" },
-            { name: "num_heads", label: "Number of Heads", type: "number", default: 4 , help: "" },
-            { name: "ff_dim", label: "Feedforward Dimension", type: "number", default: 32 , help: "" },
-            { name: "dropout", label: "Dropout", type: "number", default: 0.1 , help: "" }
-            ],
-    TransformerEncoder: [
-            { name: "num_layers", label: "Number of Layers", type: "number", default: 0 , help: "" },
-            { name: "embed_dim", label: "Embeddings Dimension", type: "number", default: 0 , help: "" },
-            { name: "num_heads", label: "Number of Heads", type: "number", default: 4 , help: "" },
-            { name: "ff_dim", label: "Feedforward Dimension", type: "number", default: 32 , help: "" },
-            { name: "dropout", label: "Dropout", type: "number", default: 0.1 , help: "" }
-            ],
-    TransformerDecoder: [
-            { name: "num_layers", label: "Number of Layers", type: "number", default: 0 , help: "" },
-            { name: "embed_dim", label: "Embeddings Dimension", type: "number", default: 0 , help: "" },
-            { name: "num_heads", label: "Number of Heads", type: "number", default: 4 , help: "" },
-            { name: "ff_dim", label: "Feedforward Dimension", type: "number", default: 32 , help: "" },
-            { name: "dropout", label: "Dropout", type: "number", default: 0.1 , help: "" }
-            ],
-    MultiHeadAttention: [
-            { name: "num_heads", label: "Number of Heads", type: "number", default: 4 , help: "" },
-            { name: "key_dim", label: "Key Dimension", type: "number", default: 32 , help: "" },
-            { name: "dropout", label: "Dropout", type: "number", default: 0.1 , help: "" }
-            ],
-    Activation: [
-            { name: "activation", label: "Activation", type: "text", default: "relu" , help: "" }
-            ],
-    Dense:  [
-            { name: "units", label: "Units", type: "number", default: 64 , help: "" },
-            { name: "activation", label: "Activation", type: "text", default: "relu" , help: "" }
-            ],
-    Conv1D: [
-            { name: "filters", label: "Filters", type: "number", default: 0 , help: "" },
-            { name: "kernel_size", label: "Kernel size", type: "text", default: 0 , help: "" },
-            { name: "strides", label: "Strides", type: "text", default: 0 , help: "" },
-            { name: "activation", label: "Activation", type: "text", default: "relu" , help: "" }
-            ],
-    GaussianNoise:[
-            { name: "stddev", label: "Standard Deviation", type: "number", default: 0.1 , help: "" }
-            ],
-    Reshape:[
-            { name: "target_shape", label: "Target Shape", type: "text", default: 0 , help: "" }
-            ],
-    Flatten:[
-            { name: "data_formet", label: "Data Format", type: "text", default: 0 , help: "" }
-            ],
-    LayerNormalization: [
-            { name: "axis", label: "Axis", type: "number", default: -1 , help: "" },
-            { name: "epsilon", label: "Epsilon", type: "number", default: 1e-6 , help: "" }
-            ]
-};
-
-// Helper to reorder an array
-function reorder(list, startIndex, endIndex) {
-  const res = Array.from(list);
-  const [moved] = res.splice(startIndex, 1);
-  res.splice(endIndex, 0, moved);
-  return res;
-}
-
-// Deep compare helper for layers (without id)
-function layersEqual(a, b) {
-  try {
-    return JSON.stringify(a) === JSON.stringify(b);
-  } catch {
-    return false;
-  }
-}
+const uid = (() => { let i = 1; return () => `blk-${i++}`; })();
 
 export default function BuildModelTab({ config, onChange, modelType }) {
-  const idCounter = useRef(0);
-
-  // Selected layers state with internal id
   const [selected, setSelected] = useState(() => {
-    const layers = config.model?.layers || [];
-    return layers.map(layer => ({
-      ...layer,
-      id: layer.id ?? `blk-${idCounter.current++}`
-    }));
+    const layers = (config?.model?.layers) || [];
+    return layers.map(layer => ({ ...layer, id: layer.id ?? uid() }));
   });
-
-  // Track expanded/collapsed state
   const [expanded, setExpanded] = useState({});
+  const dragIndex = useRef(null);
 
-  // Sync selected state when modelType or config.model.layers changes
+  // sync back into config
   useEffect(() => {
-    const layersFromConfig = config.model?.layers || [];
-    const simplifiedSelected = selected.map(({ id, ...rest }) => rest);
-    if (!layersEqual(layersFromConfig, simplifiedSelected)) {
-      const init = layersFromConfig.map(layer => ({
-        ...layer,
-        id: layer.id ?? `blk-${idCounter.current++}`
-      }));
-      setSelected(init);
-      setExpanded({}); // reset expansion
-    }
-  }, [config.model?.layers, modelType]);
-
-  // Propagate selection changes upward
-  useEffect(() => {
-    const layersToSave = selected.map(({ id, ...rest }) => rest);
-    onChange({ ...config, model: { ...config.model, layers: layersToSave } });
+    onChange({
+      ...config,
+      model: {
+        ...(config.model || {}),
+        layers: selected.map(({ id, ...rest }) => rest)
+      }
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
-  // Handle drag end event
-  const onDragEnd = result => {
-    const { source, destination, draggableId } = result;
-    if (!destination) return;
-
-    // Add new block from available to selected
-    if (source.droppableId === "available" && destination.droppableId === "selected") {
-      const type = draggableId;
-      const params = {};
-      (PARAM_SCHEMAS[type] || []).forEach(p => (params[p.name] = p.default));
-      const newBlk = { id: `blk-${idCounter.current++}`, type, params };
-      const upd = Array.from(selected);
-      upd.splice(destination.index, 0, newBlk);
-      setSelected(upd);
-    }
-
-    // Reorder within selected pane
-    if (source.droppableId === "selected" && destination.droppableId === "selected") {
-      setSelected(reorder(selected, source.index, destination.index));
-    }
+  const addLayer = (tpl) => {
+    const copy = JSON.parse(JSON.stringify(tpl));
+    setSelected(prev => [...prev, { id: uid(), ...copy }]);
+  };
+  const removeLayer = (id) => setSelected(prev => prev.filter(x => x.id !== id));
+  const moveLayer = (from, to) => {
+    setSelected(prev => {
+      const arr = [...prev];
+      const [item] = arr.splice(from, 1);
+      arr.splice(to, 0, item);
+      return arr;
+    });
   };
 
-  const updateParam = (idx, name, value) => {
-    setSelected(sel =>
-      sel.map((blk, i) =>
-        i === idx
-          ? { ...blk, params: { ...blk.params, [name]: value } }
-          : blk
-      )
-    );
+  const handleDragStart = (idx) => (e) => {
+    dragIndex.current = idx;
+    e.dataTransfer.effectAllowed = "move";
+  };
+  const handleDragOver = (idx) => (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+  const handleDrop = (idx) => (e) => {
+    e.preventDefault();
+    const from = dragIndex.current;
+    if (from === null || from === idx) return;
+    moveLayer(from, idx);
+    dragIndex.current = null;
   };
 
-  const removeBlock = idx => setSelected(sel => sel.filter((_, i) => i !== idx));
-
-  const toggleExpand = id => setExpanded(exp => ({ ...exp, [id]: !exp[id] }));
-
-  // Determine blocks available for the selected model type
-  const availableBlocks = BLOCK_LIBRARY[modelType] || [];
+  const updateParam = (id, key, value) => {
+    setSelected(prev => prev.map(l => l.id === id ? { ...l, params: { ...(l.params || {}), [key]: value } } : l));
+  };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div style={{ display: "flex", gap: "2rem" }}>
-        {/* Available Blocks Pane */}
-        <Droppable droppableId="available" type="BLOCK">
-          {prov => (
-            <div
-              ref={prov.innerRef}
-              {...prov.droppableProps}
-              style={{
-                flex: 1,
-                padding: 16,
-                border: "1px solid #ccc",
-                borderRadius: 4,
-                minHeight: 200
-              }}
-            >
-              <h4>Available Blocks ({modelType})</h4>
-              {availableBlocks.map((type, idx) => (
-                <Draggable key={type} draggableId={type} index={idx}>
-                  {prov => (
-                    <div
-                      ref={prov.innerRef}
-                      {...prov.draggableProps}
-                      {...prov.dragHandleProps}
-                      style={{
-                        padding: 8,
-                        margin: "4px 0",
-                        background: "#f0f0f0",
-                        borderRadius: 4,
-                        cursor: "grab",
-                        ...prov.draggableProps.style
-                      }}
-                    >
-                      {type}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {prov.placeholder}
-            </div>
-          )}
-        </Droppable>
+    <div style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: 16 }}>
+      <aside style={{ border: "1px solid #ddd", borderRadius: 8, padding: 12 }}>
+        <h4 style={{ marginTop: 0 }}>Layer palette</h4>
+        {LAYER_TEMPLATES.map(tpl => (
+          <button key={tpl.type} onClick={() => addLayer(tpl)} style={{ display: "block", width: "100%", textAlign: "left", marginBottom: 6 }}>
+            + {tpl.type}
+          </button>
+        ))}
+        <p style={{ fontSize: 12, opacity: 0.8, marginTop: 12 }}>Click to add. Drag to reorder. Expand to edit params.</p>
+      </aside>
 
-        {/* Selected Layers Pane */}
-        <Droppable droppableId="selected" type="BLOCK">
-          {prov => (
-            <div
-              ref={prov.innerRef}
-              {...prov.droppableProps}
-              style={{
-                flex: 2,
-                padding: 16,
-                border: "1px solid #ccc",
-                borderRadius: 4,
-                minHeight: 200
-              }}
-            >
-              <h4>Model Layers</h4>
-              {selected.map((blk, idx) => (
-                <Draggable key={blk.id} draggableId={blk.id} index={idx}>
-                  {prov => (
-                    <div
-                      ref={prov.innerRef}
-                      {...prov.draggableProps}
-                      style={{
-                        margin: "8px 0",
-                        background: "#e8f0fe",
-                        borderRadius: 4,
-                        ...prov.draggableProps.style
-                      }}
-                    >
-                      {/* Header with expand/collapse and remove */}
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                          padding: 8
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center" }}>
-                          <button
-                            onClick={() => toggleExpand(blk.id)}
-                            style={{
-                              marginRight: 8,
-                              cursor: "pointer",
-                              border: "none",
-                              background: "transparent",
-                              fontSize: 16
-                            }}
-                            aria-label={expanded[blk.id] ? "Collapse" : "Expand"}
-                          >
-                            {expanded[blk.id] ? "▼" : "▶"}
-                          </button>
-                          <div {...prov.dragHandleProps} style={{ cursor: "grab" }}>
-                            <strong>{blk.type}</strong>
-                          </div>
-                        </div>
-                        <button onClick={() => removeBlock(idx)}>Remove</button>
-                      </div>
-                      {/* Parameters panel */}
-                      {expanded[blk.id] && (
-                        <div style={{ padding: "8px 16px" }}>
-                          {(PARAM_SCHEMAS[blk.type] || []).map(param => (
-                            <div key={param.name} style={{ marginBottom: 8 }}>
-                              <label style={{ display: "block", fontSize: "0.9rem" }}>
-                                {param.label}:
-                              </label>
-                              {param.type === "boolean" ? (
-                                <input
-                                  type="checkbox"
-                                  checked={!!blk.params[param.name]}
-                                  onChange={e =>
-                                    updateParam(idx, param.name, e.target.checked)
-                                  }
-                                />
-                              ) : (
-                                <input
-                                  type={param.type}
-                                  value={blk.params[param.name]}
-                                  onChange={e =>
-                                    updateParam(
-                                      idx,
-                                      param.name,
-                                      param.type === "number"
-                                        ? Number(e.target.value)
-                                        : e.target.value
-                                    )
-                                  }
-                                  style={{ width: "100%" }}
-                                />
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </Draggable>
-              ))}
-              {prov.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </div>
-    </DragDropContext>
+      <section style={{ border: "1px solid #ddd", borderRadius: 8 }}>
+        <div style={{ padding: 12, borderBottom: "1px solid #eee", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <h4 style={{ margin: 0 }}>Architecture</h4>
+          <small style={{ opacity: 0.8 }}>{modelType || "Model"}</small>
+        </div>
+
+        <ol style={{ listStyle: "none", margin: 0, padding: 12 }}>
+          {selected.map((layer, idx) => (
+            <li key={layer.id}
+                draggable
+                onDragStart={handleDragStart(idx)}
+                onDragOver={handleDragOver(idx)}
+                onDrop={handleDrop(idx)}
+                style={{ padding: 10, marginBottom: 10, border: "1px solid #eee", borderRadius: 8, background: "#fff" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                <strong>{idx + 1}. {layer.type}</strong>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <button onClick={() => setExpanded(p => ({ ...p, [layer.id]: !p[layer.id] }))}>{expanded[layer.id] ? "Hide" : "Edit"}</button>
+                  <button onClick={() => removeLayer(layer.id)} aria-label="Remove">Remove</button>
+                </div>
+              </div>
+              {expanded[layer.id] && (
+                <div style={{ marginTop: 8, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 8 }}>
+                  {Object.entries(layer.params || {}).map(([k, v]) => (
+                    <label key={k} style={{ display: "grid", gap: 4 }}>
+                      <span style={{ fontSize: 12, opacity: 0.8 }}>{k}</span>
+                      <input
+                        type={typeof v === "number" ? "number" : "text"}
+                        value={v}
+                        onChange={e => updateParam(layer.id, k, typeof v === "number" ? Number(e.target.value) : e.target.value)}
+                      />
+                    </label>
+                  ))}
+                  {/* Allow arbitrary param add */}
+                  <details style={{ gridColumn: "1 / -1" }}>
+                    <summary>Add / update custom param</summary>
+                    <ParamEditor onSet={(key, val) => updateParam(layer.id, key, val)} />
+                  </details>
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+        {selected.length === 0 && <div style={{ padding: 12, opacity: 0.7 }}>No layers yet — add from the palette on the left.</div>}
+      </section>
+    </div>
+  );
+}
+
+function ParamEditor({ onSet }) {
+  const [key, setKey] = useState("");
+  const [val, setVal] = useState("");
+  const [isNum, setIsNum] = useState(true);
+
+  return (
+    <div style={{ display: "flex", gap: 8, alignItems: "end" }}>
+      <label>Key
+        <input value={key} onChange={e => setKey(e.target.value)} placeholder="units" />
+      </label>
+      <label>Value
+        <input value={val} onChange={e => setVal(e.target.value)} placeholder="64" />
+      </label>
+      <label style={{ display: "flex", gap: 6, alignItems: "center" }}>
+        <input type="checkbox" checked={isNum} onChange={e => setIsNum(e.target.checked)} />
+        treat as number
+      </label>
+      <button onClick={() => { if (!key) return; onSet(key, isNum ? Number(val) : val); }}>Set</button>
+    </div>
   );
 }
